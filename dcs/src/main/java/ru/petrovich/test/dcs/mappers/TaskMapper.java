@@ -13,11 +13,11 @@ public class TaskMapper implements RowMapper<Task> {
     @Override
     public Task mapRow(ResultSet rs, int rowNum) throws SQLException {
         Task task = new Task();
-        task.setCreated(rs.getDate("created"));
-        task.setProcessed(rs.getDate("processed"));
+        task.setCreated(rs.getTimestamp("created"));
+        task.setProcessed(rs.getTimestamp("processed"));
         task.setOrder_number(rs.getLong("order_number"));
         task.set_postponed(rs.getBoolean("is_postponed"));
-        task.set_processed(rs.getBoolean("is_processed"));
+        task.setHasProcessed(rs.getBoolean("hasProcessed"));
         return task;
     }
 }

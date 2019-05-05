@@ -1,0 +1,37 @@
+CREATE TABLE Client (
+id bigint(20) NOT NULL AUTO_INCREMENT,
+last_name varchar(255) DEFAULT NULL,
+first_name varchar(255) DEFAULT NULL,
+middle_name varchar(255) DEFAULT NULL,
+sex varchar(10) DEFAULT NULL,
+PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8;
+
+CREATE TABLE Orders (
+id bigint(20) NOT NULL AUTO_INCREMENT,
+number bigint(20) NOT NULL,
+client_id bigint(20) NOT NULL,
+is_processed boolean DEFAULT FALSE,
+order_state varchar(255) NOT NULL,
+PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8;
+
+CREATE TABLE Tasks (
+id bigint(20) NOT NULL AUTO_INCREMENT,
+created datetime DEFAULT NULL,
+processed datetime DEFAULT NULL,
+order_number bigint(20) NOT NULL,
+is_postponed BOOLEAN DEFAULT FALSE,
+hasProcessed BOOLEAN DEFAULT FALSE,
+PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8;
+
+
+ALTER TABLE `dcs`.`orders`
+ADD INDEX `client_id_fk_idx` (`client_id` ASC);
+ALTER TABLE `dcs`.`orders`
+ADD CONSTRAINT `client_id_fk`
+  FOREIGN KEY (`client_id`)
+  REFERENCES `dcs`.`client` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

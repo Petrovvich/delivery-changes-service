@@ -39,5 +39,5 @@ public class Task {
     /**
      * Обработана ли заявка.
      */
-    private boolean is_processed;
+    private boolean hasProcessed;
 }

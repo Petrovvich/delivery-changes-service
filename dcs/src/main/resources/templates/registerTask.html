@@ -1,16 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Register new task</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h3>Укажите номер заказа и выставите флаг "Не успеваю", чтобы отправить заявку в работу в колл-центр</h3>
-<form name="register_new_task" action="registerTask.html" method="post">
-    <input type="text" name="order_id" placeholder="Номер заказа">
-    <p>Не успеваю: <input type="checkbox" name="is_postponed"></p>
-    <input type="submit" name="submit">
+<h3>Укажите номер заказа чтобы отправить заявку в работу в колл-центр</h3>
+<form name="register_new_task" action="/tasks/create/" method="post">
+    <input type="number" name="number" placeholder="Номер заказа">
+    <button>Не успеваю</button>
 </form>
 
 </body>

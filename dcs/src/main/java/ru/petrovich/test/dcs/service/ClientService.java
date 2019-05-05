@@ -5,22 +5,19 @@ import ru.petrovich.test.dcs.config.SpringJdbcConfig;
 import ru.petrovich.test.dcs.dao.ClientDaoImplJdbcTemplate;
 import ru.petrovich.test.dcs.model.Client;
 
+/**
+ * Сервис, описывающий все взаимодействиями с сущностью клиента.
+ */
 @Service
 public class ClientService {
 
-    private SpringJdbcConfig config;
     private ClientDaoImplJdbcTemplate clientDaoImplJdbcTemplate;
 
     public ClientService(SpringJdbcConfig config) {
-        this.config = config;
-        this.clientDaoImplJdbcTemplate = new ClientDaoImplJdbcTemplate();
-        clientDaoImplJdbcTemplate.setDataSource(config.mysqlDataSource());
+        this.clientDaoImplJdbcTemplate = new ClientDaoImplJdbcTemplate(config.mysqlDataSource());
     }
 
     public Client getClientById(Long id) {
-
-        Client result = clientDaoImplJdbcTemplate.getById(id);
-
-        return result;
+        return clientDaoImplJdbcTemplate.getById(id).orElse(null);
     }
 }
