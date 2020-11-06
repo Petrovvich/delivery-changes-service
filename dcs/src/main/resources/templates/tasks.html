@@ -9,8 +9,8 @@
 <a href="/tasks/">На главную</a>
 <h3>Список заявок в обработке</h3>
 <form action="/tasks/search/" method="get">
-    <label for="search_input">Поиск по номеру заказа:</label>
-    <input type="number" id="search_input" name="search_input">
+    <label for="orderNumber">Поиск по номеру заказа:</label>
+    <input type="number" id="orderNumber" name="orderNumber">
     <button>Искать</button>
 </form>
 <table>
@@ -23,8 +23,8 @@
     </thead>
     <tbody>
     <tr th:each="task: ${tasks}">
-        <td th:text="${task.order_number}" />
-        <td th:text="${#dates.format(task.created, 'dd.MM.yyyy HH:mm:ss')}" />
+        <td th:text="${task.orderNumber}" />
+        <td th:text="${#temporals.format(task.created, 'dd.MM.yyyy HH:mm')}" />
         <td th:switch="${task.hasProcessed}">
             <span th:case="true" th:text="Да"/>
             <span th:case="false" th:text="Нет"/>
