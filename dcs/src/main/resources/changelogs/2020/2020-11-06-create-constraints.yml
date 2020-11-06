@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: alexromantrue@gmail.com
+      comment: Create foreign key for table order on column client_id
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: CONTINUE
+        - not:
+            - foreignKeyConstraintExists:
+                foreignKeyTableName: order
+                foreignKeyName: order_client_id_fk
+      changes:
+        - addForeignKeyConstraint:
+            baseTableCatalogName: dcs
+            referencedTableCatalogName: dcs
+            baseColumnNames: client_id
+            baseTableName: order
+            constraintName: order_client_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: client

@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: alexromantrue@gmail.com
+      comment: Create table order
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: CONTINUE
+        - not:
+            - tableExists:
+                tableName: order
+      changes:
+        - createTable:
+            tableName: order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: bigint
+              - column:
+                  name: client_id
+                  type: bigint
+              - column:
+                  name: is_processed
+                  type: boolean
+              - column:
+                  name: order_state
+                  type: varchar(20)

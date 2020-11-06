@@ -1,13 +1,15 @@
 package ru.petrovich.test.dcs.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
+@Slf4j
 @Controller
 public class BaseController {
-    @RequestMapping(value = {"/", "/index", "index.html"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/", "/index", "index.html"})
     public String index() {
+        log.debug("Handle index page request");
         return "registerTask";
     }
 }

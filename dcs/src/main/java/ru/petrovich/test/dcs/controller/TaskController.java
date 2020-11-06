@@ -1,26 +1,30 @@
 package ru.petrovich.test.dcs.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.petrovich.test.dcs.service.TaskService;
+import ru.petrovich.test.dcs.model.Task;
+import ru.petrovich.test.dcs.service.impl.TaskServiceImpl;
 
 import java.util.List;
 
+@Slf4j
 @Controller
-@RequestMapping(value = "tasks/")
+@RequiredArgsConstructor
+@RequestMapping(path = "tasks/")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+    private final TaskServiceImpl taskServiceImpl;
 
-    @RequestMapping(value = "create/", method = RequestMethod.POST)
+    @PostMapping
     public String createNew(@RequestParam Long number, Model model) {
-        taskService.registerNew(number);
+        log.debug("Try to handle save request for id {}, model {}", number, model);
+        taskServiceImpl.registerNew(number);
 
         model.addAttribute("status", "Сохранение прошло успешно");
         return "registerTask";
@@ -28,16 +32,18 @@ public class TaskController {
 
     @GetMapping
     public String tasks(Model model) {
-        List tasks = taskService.findAll();
+        log.debug("Try to handle get tasks request model {}", model);
+        List<Task> tasks = taskServiceImpl.findAll();
 
         model.addAttribute("tasks", tasks);
         return "tasks";
     }
 
-    @GetMapping(value = "search/")
-    public String search(@RequestParam Long search_input, Model model) {
+    @GetMapping(path = "search/")
+    public String search(@RequestParam Long orderNumber, Model model) {
+        log.debug("Try to handle search request for id {}, model {}", orderNumber, model);
 
-        List tasks = taskService.findAllByNumber(search_input);
+        List<Task> tasks = taskServiceImpl.findAllByNumber(orderNumber);
         model.addAttribute("tasks", tasks);
         return "tasks";
     }

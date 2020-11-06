@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: alexromantrue@gmail.com
+      comment: Create table task
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: CONTINUE
+        - not:
+            - tableExists:
+                tableName: task
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+              - column:
+                  name: processed
+                  type: timestamp
+              - column:
+                  name: order_number
+                  type: bigint
+              - column:
+                  name: postponed
+                  type: boolean
+              - column:
+                  name: has_processed
+                  type: boolean

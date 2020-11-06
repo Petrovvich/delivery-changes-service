@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  mysql:
+    build:
+      context: ./db/mysql
+    volumes:
+    - /opt/mysql/:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dcs
+      MYSQL_DATABASE: dcs
+      MYSQL_USER: dcs
+      MYSQL_PASSWORD: dcs
+    ports:
+    - "3306:3306"
+  dcs:
+    depends_on:
+      - mysql
+    build:
+      context: ../dcs

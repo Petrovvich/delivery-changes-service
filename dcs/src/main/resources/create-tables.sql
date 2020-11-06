@@ -21,8 +21,8 @@ id bigint(20) NOT NULL AUTO_INCREMENT,
 created datetime DEFAULT NULL,
 processed datetime DEFAULT NULL,
 order_number bigint(20) NOT NULL,
-is_postponed BOOLEAN DEFAULT FALSE,
-hasProcessed BOOLEAN DEFAULT FALSE,
+postponed BOOLEAN DEFAULT FALSE,
+has_processed BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (id)
 ) DEFAULT CHARSET = utf8;
 

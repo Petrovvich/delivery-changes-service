@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: changelogs/2020/2020-11-06-create-table-client.yml
+  - include:
+      file: changelogs/2020/2020-11-06-create-table-order.yml
+  - include:
+      file: changelogs/2020/2020-11-06-create-table-task.yml
+  - include:
+      file: changelogs/2020/2020-11-06-create-constraints.yml
